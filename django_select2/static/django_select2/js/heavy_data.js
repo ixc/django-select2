@@ -9,7 +9,10 @@ if (!window['django_select2']) {
 				res = {
 					'term': term,
 					'page': page,
-					'context': context
+					// During pagination, the `context` includes an element that jQuery's buildParams will
+					// attempt a for-in loop over. Unfortunately the for-in slowly traverses every property
+					// on the element (and document) before blowing memory.
+					// 'context': context
 				};
 			if (field_id) {
 				res['field_id'] = field_id;
